@@ -1,5 +1,6 @@
 <?php
 
+#전체 페이지가 모두 session 을 사용하겠다는 뜻
 session_start();
 
 $mysql_hostname = 'host.docker.internal';
