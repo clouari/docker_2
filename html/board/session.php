@@ -2,7 +2,7 @@
 
     session_start();
 
-    
+    # 먼저 선언을 해 줘야 뒤에서 값이 반영된다.
     $id = $_POST['id'];
     $pw = $_POST['pw'];
 
