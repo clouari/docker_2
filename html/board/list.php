@@ -1,13 +1,16 @@
 <?php 
     include "../check/db.php";
 
+    if($_SESSION["board_name"] == '')
+        $_SESSION["board_name"] = "자유";
+
     $total_sql = "SELECT count(*) as total FROM board";
 
     $total_result = $conn->query($total_sql);
     $total_row = $total_result->fetch_row();
 
-    $config_list_set_count = 10; //리스트에 표시할 게시물 수 
-    $config_list_max_count = 9; //하단 페이지를 몇개까지 표시할 것인가
+    $config_list_set_count = 8; //리스트에 표시할 게시물 수 
+    $config_list_max_count = 5; //하단 페이지를 몇개까지 표시할 것인가
     $now_page = $_GET['now_page'];  //현재 위치한 페이지
     $total_count = $total_row[0]; //전체 게시물 수
     $total_page_count = ceil($total_count/$config_list_set_count);
@@ -23,6 +26,8 @@
         view_count 
     FROM 
         board 
+    WHERE
+        board_name = '".$_SESSION['board_name']."'
     order by _id desc
     LIMIT ".$config_list_set_count * ($now_page-1).",".$config_list_set_count."
     ";
@@ -33,11 +38,19 @@
     $conn->close();
 
 ?>
+
+
 <html>
     <head>
         <title>나만의 게시판</title>
     </head>
     <body>
+
+        게시판 바로가기 : 
+        <a href='board_change.php?board_name=자유'>자유게시판</a>
+        <a href='board_change.php?board_name=장터'>장터게시판</a>
+        <a href='board_change.php?board_name=임시'>임시게시판</a>
+        <hr>
 
         <table style="border:1px solid #000; width:100%">
             <tr>

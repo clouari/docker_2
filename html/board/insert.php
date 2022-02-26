@@ -2,18 +2,19 @@
 
 include "../check/db.php";
 
-    $name = $_POST["name"];
-    $title = $_POST["title"];
-    $content = $_POST["content"];
+$board_name =  $_POST["board_name"];
+$name = $_POST["name"];
+$title = $_POST["title"];
+$content = $_POST["content"];
 
-    $sql = "
-    Insert INTO board (name,title,content)
-    VALUES ('".$name."','".$title."','".$content."')
-    ";
+$sql = "
+INSERT INTO board (name,title,content,board_name)
+VALUES ('". $name ."','". $title ."','". $content ."','". $board_name ."')
+";
 
+$conn->query($sql);
 
-   $conn->query($sql);
-   $conn->close();
+$conn->close();
 
 ?>
 
